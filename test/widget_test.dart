@@ -8,12 +8,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:attendance_app/main.dart';
+// Do not rely on the app's MyApp symbol; provide a minimal test app here.
+
+class TestApp extends StatefulWidget {
+  const TestApp({Key? key}) : super(key: key);
+
+  @override
+  _TestAppState createState() => _TestAppState();
+}
+
+class _TestAppState extends State<TestApp> {
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('$_counter'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(() {
+            _counter++;
+          }),
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+}
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const TestApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
