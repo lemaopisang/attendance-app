@@ -41,6 +41,14 @@ class TestApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      home: const HomeScreen(),
+      routes: {
+        '/home': (context) => const HomeScreen(),
+        '/attend': (context) => const AttendScreen(),
+        '/absent': (context) => const AbsentScreen(),
+        '/attendance-history': (context) =>
+            const AttendanceHistoryScreen(),
+      },
     );
   }
 }

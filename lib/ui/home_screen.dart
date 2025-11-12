@@ -49,7 +49,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(
-                          image: AssetImage('assets/images/ic_absen.png'),
+                          image: AssetImage(
+                            'assets/images/images/ic_absen.png',
+                          ),
                           height: 100,
                           width: 100,
                         ),
@@ -80,7 +82,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(
-                          image: AssetImage('assets/images/ic_leave.png'),
+                          image: AssetImage(
+                            'assets/images/images/ic_leave.png',
+                          ),
                           height: 100,
                           width: 100,
                         ),
@@ -111,7 +115,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(
-                          image: AssetImage('assets/images/ic_history.png'),
+                          image: AssetImage(
+                            'assets/images/images/ic_history.png',
+                          ),
                           height: 100,
                           width: 100,
                         ),
