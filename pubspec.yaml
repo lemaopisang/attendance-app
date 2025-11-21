@@ -41,6 +41,8 @@ dependencies:
   firebase_core: ^4.2.1 # Connect Flutter to Firebase
   firebase_auth: ^6.1.2 # Firebase Authentication
   image_picker: ^1.1.2 # Image Picker
+  flutter_animate: ^4.5.0 # Delightful animations
+  google_fonts: ^6.2.1 # Comfortable modern typography
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -71,6 +73,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/raw/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
