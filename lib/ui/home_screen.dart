@@ -31,68 +31,79 @@ class HomeScreen extends StatelessWidget {
                 _buildHeader(context),
                 const SizedBox(height: 32),
                 Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 18,
-                    childAspectRatio: .85,
+                  child: ListView(
                     physics: const BouncingScrollPhysics(),
                     children: [
-                      _DashboardCard(
-                        title: 'Check In',
-                        subtitle: 'Face capture',
-                        asset: 'assets/images/ic_absen.png',
-                        gradientColors: const [Color(0xFF00F5A0), Color(0xFF00D9F5)],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AttendScreen(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 220,
+                              child: _DashboardCard(
+                                title: 'Check In',
+                                subtitle: 'Face capture',
+                                asset: 'assets/images/ic_absen.png',
+                                gradientColors:
+                                    const [Color(0xFF00F5A0), Color(0xFF00D9F5)],
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AttendScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          );
-                        },
+                          ),
+                          const SizedBox(width: 18),
+                          Expanded(
+                            child: SizedBox(
+                              height: 220,
+                              child: _DashboardCard(
+                                title: 'Permission',
+                                subtitle: 'Submit request',
+                                asset: 'assets/images/ic_leave.png',
+                                gradientColors:
+                                    const [Color(0xFFFF5F6D), Color(0xFFFFC371)],
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AbsentScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      _DashboardCard(
-                        title: 'Permission',
-                        subtitle: 'Submit request',
-                        asset: 'assets/images/ic_leave.png',
-                        gradientColors: const [Color(0xFFFF5F6D), Color(0xFFFFC371)],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AbsentScreen(),
+                      const SizedBox(height: 22),
+                      Align(
+                        alignment: Alignment.center,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.8,
+                          child: SizedBox(
+                            height: 220,
+                            child: _DashboardCard(
+                              title: 'History',
+                              subtitle: 'Review summary',
+                              asset: 'assets/images/ic_history.png',
+                              gradientColors:
+                                  const [Color(0xFF845EC2), Color(0xFFD65DB1)],
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AttendanceHistoryScreen(),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                      _DashboardCard(
-                        title: 'History',
-                        subtitle: 'Review summary',
-                        asset: 'assets/images/ic_history.png',
-                        gradientColors: const [Color(0xFF845EC2), Color(0xFFD65DB1)],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AttendanceHistoryScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                      _DashboardCard(
-                        title: 'Live Camera',
-                        subtitle: 'Capture selfie',
-                        asset: 'assets/images/ic_absen.png',
-                        gradientColors: const [Color(0xFF2AF598), Color(0xFF009EFD)],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AttendScreen(),
-                            ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ],
                   ).animate().fadeIn(duration: 600.ms).slideY(begin: .1),
