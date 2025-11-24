@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                               height: 220,
                               child: _DashboardCard(
                                 title: 'Check In',
-                                subtitle: 'Face capture',
+                                subtitle: 'Log-In today with Face capture',
                                 asset: 'assets/images/ic_absen.png',
                                 gradientColors:
                                     const [Color(0xFF00F5A0), Color(0xFF00D9F5)],
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                               height: 220,
                               child: _DashboardCard(
                                 title: 'Permission',
-                                subtitle: 'Submit request',
+                                subtitle: 'Problem in the way? Submit request',
                                 asset: 'assets/images/ic_leave.png',
                                 gradientColors:
                                     const [Color(0xFFFF5F6D), Color(0xFFFFC371)],
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                             height: 220,
                             child: _DashboardCard(
                               title: 'History',
-                              subtitle: 'Review summary',
+                              subtitle: 'Review your track record here',
                               asset: 'assets/images/ic_history.png',
                               gradientColors:
                                   const [Color(0xFF845EC2), Color(0xFFD65DB1)],
@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          'Neon glass dashboard for quick daily actions.',
+          'A simple & catchy dashboard for quick daily actions.',
           style: GoogleFonts.inter(
             color: Colors.white70,
             fontSize: 15,

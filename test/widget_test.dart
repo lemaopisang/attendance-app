@@ -11,13 +11,13 @@ import 'package:flutter_test/flutter_test.dart';
 // Do not rely on the app's MyApp symbol; provide a minimal test app here.
 
 class TestApp extends StatefulWidget {
-  const TestApp({Key? key}) : super(key: key);
+  const TestApp({super.key});
 
   @override
-  _TestAppState createState() => _TestAppState();
+  State<TestApp> createState() => TestAppState();
 }
 
-class _TestAppState extends State<TestApp> {
+class TestAppState extends State<TestApp> {
   int _counter = 0;
 
   @override

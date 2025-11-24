@@ -33,7 +33,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         backgroundColor: Colors.black.withValues(alpha: 0.9),
         title: Text(
           'Edit Data',
@@ -56,6 +56,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
         actions: [
           TextButton(
             onPressed: () async {
+              final navigator = Navigator.of(dialogContext);
               await dataCollection.doc(docId).update({
                 'name': nameController.text,
                 'address': addressController.text,
@@ -63,13 +64,13 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                 'datetime': datetimeController.text,
               });
               if (!mounted) return;
-              Navigator.pop(context);
+              navigator.pop();
               setState(() {});
             },
             child: Text('Save', style: GoogleFonts.inter(color: Colors.cyanAccent)),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: Text('Cancel', style: GoogleFonts.inter(color: Colors.white70)),
           ),
         ],
@@ -80,7 +81,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
   void _deleteData(String docId) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         backgroundColor: Colors.black.withValues(alpha: 0.9),
         title: Text(
           'Delete Data',
@@ -96,15 +97,16 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
         actions: [
           TextButton(
             onPressed: () async {
+              final navigator = Navigator.of(dialogContext);
               await dataCollection.doc(docId).delete();
               if (!mounted) return;
-              Navigator.pop(context);
+              navigator.pop();
               setState(() {});
             },
             child: Text('Yes', style: GoogleFonts.inter(color: Colors.redAccent)),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: Text('No', style: GoogleFonts.inter(color: Colors.white70)),
           ),
         ],
@@ -196,7 +198,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Attendance History',
+                  'Your Attendance History',
                   style: GoogleFonts.spaceGrotesk(
                     color: Colors.white,
                     fontSize: 22,
@@ -204,7 +206,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   ),
                 ),
                 Text(
-                  'Review and manage today’s submissions.',
+                  'Review or manage your attendance submissions.',
                   style: GoogleFonts.inter(color: Colors.white60, fontSize: 13),
                 ),
               ],

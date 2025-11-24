@@ -19,12 +19,12 @@ Future<void> main() async {
       ),
     );
     // Firebase connection success
-    print("Firebase Terhubung ke:");
-    print("API Key: ${Firebase.app().options.apiKey}");
-    print("Project ID: ${Firebase.app().options.projectId}");
+    debugPrint('Firebase connected:');
+    debugPrint('API Key: ${Firebase.app().options.apiKey}');
+    debugPrint('Project ID: ${Firebase.app().options.projectId}');
   } catch (e) {
     // Firebase connection failed
-    print("Firebase gagal terhubung: $e");
+    debugPrint('Firebase failed to connect: $e');
   }
   // runApp(const HomeScreen());
   runApp(const TestApp());

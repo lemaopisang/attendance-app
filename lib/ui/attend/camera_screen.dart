@@ -69,6 +69,7 @@ class _State extends State<CameraScreen> with TickerProviderStateMixin {
         debugPrint('Error initializing camera: $e');
       }
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Row(
@@ -131,9 +132,12 @@ class _State extends State<CameraScreen> with TickerProviderStateMixin {
 
   //permission location
   Future<bool> handleLocationPermission() async {
+    final messenger = ScaffoldMessenger.of(context);
+
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      if (!mounted) return false;
+      messenger.showSnackBar(
         const SnackBar(
           content: Row(
             children: [
@@ -155,14 +159,15 @@ class _State extends State<CameraScreen> with TickerProviderStateMixin {
 
     bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationEnabled) {
-      print("Layanan lokasi tidak aktif, silakan aktifkan GPS.");
+      debugPrint('Location service is currently disabled.');
     }
 
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        if (!mounted) return false;
+        messenger.showSnackBar(
           const SnackBar(
             content: Row(
               children: [
@@ -184,7 +189,8 @@ class _State extends State<CameraScreen> with TickerProviderStateMixin {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      if (!mounted) return false;
+      messenger.showSnackBar(
         const SnackBar(
           content: Row(
             children: [
@@ -210,43 +216,40 @@ class _State extends State<CameraScreen> with TickerProviderStateMixin {
   Future<void> processImage(InputImage inputImage) async {
     if (isBusy) return;
     isBusy = true;
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
     final faces = await faceDetector.processImage(inputImage);
     isBusy = false;
-
-    if (mounted) {
-      setState(() {
-        Navigator.of(context).pop(true);
-        if (faces.isNotEmpty) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => AttendScreen(image: image)),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Row(
-                children: [
-                  Icon(
-                    Icons.face_retouching_natural_outlined,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "Ups, make sure that you're face is clearly visible!",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.blueGrey,
-              shape: StadiumBorder(),
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
-        }
-      });
+    if (!mounted) return;
+    navigator.pop(true);
+    if (faces.isNotEmpty) {
+      await navigator.pushReplacement(
+        MaterialPageRoute(builder: (_) => AttendScreen(image: image)),
+      );
+      return;
     }
+    messenger.showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              Icons.face_retouching_natural_outlined,
+              color: Colors.white,
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                "Ups, make sure that you're face is clearly visible!",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.blueGrey,
+        shape: StadiumBorder(),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   Widget _buildCameraSurface() {
